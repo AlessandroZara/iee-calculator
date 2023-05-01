@@ -23,7 +23,28 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M6 9l6 6 6-6" /%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  font-size: 16px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 8px;
+}
 
+select:hover, select:focus {
+  border-color: #888;
+}
+
+select:disabled {
+  opacity: 0.5;
+}
 .App-link {
   color: #61dafb;
 }
