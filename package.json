@@ -1,6 +1,12 @@
 {
   "name": "iee-calcolatore",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "App per calcolare L'indice IEE",
+  "main": "public/main.js",
+  "productName": "App per calcolare L'indice IEE",
+  "homepage": "./",
+  "author": "Alessandro Zara",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.8",
@@ -14,11 +20,24 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "build": {
+    "appId": "my_app_qr_code.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  },
+  "win": {
+    "icon": "build/favicon.ico"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "react-scripts build && electron .",
+    "start-electron": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "package": "electron-builder build --win -c.extraMetadata.main=build/electron.js --publish never",
+    "publish": "electron-builder build --mac --win --publish always"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +58,8 @@
     ]
   },
   "devDependencies": {
-    "electron": "^24.1.3"
+    "electron": "^24.0.0",
+    "electron-builder": "^23.6.0",
+    "path": "^0.12.7"
   }
 }
