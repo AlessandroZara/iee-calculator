@@ -122,7 +122,7 @@ function App() {
       <div >
 
         <div>
-          <label htmlFor="energy">Energia annua consumata (kWh):</label>
+          <label htmlFor="energy">Energia annua consumata (kWh/Anno):</label>
           <input
             id="energy"
             type="number"
