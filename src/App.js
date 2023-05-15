@@ -33,7 +33,7 @@ function App() {
       const { M, N } = table[category]; // ottengo i valori di M ed N dalla tabella
       const CH = Veq > 15 ? 50 : 15; // calcolo il valore di CH in base al volume dell'apparecchio
       console.log(CH);
-      const SAEc = Math.ceil(Veq * M + N + CH); // calcolo il valore di SAEc
+      const SAEc = Math.round(Veq * M + N); // calcolo il valore di SAEc
       setSAEc(SAEc); // aggiorno lo stato di SAEc
       console.log(Veq);
     }
@@ -46,7 +46,7 @@ function App() {
       setIEE("")
     }
     const AEc = parseFloat(energy); // converto l'energia annua consumata da stringa a numero
-    const IEE = (AEc / SAEc) * 100; // calcolo il valore di IEE
+    const IEE = Math.round((AEc / SAEc) * 100); // calcolo il valore di IEE
     setIEE(IEE); // aggiorno lo stato di IEE
   };
 
