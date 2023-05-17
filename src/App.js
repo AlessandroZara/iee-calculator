@@ -49,6 +49,13 @@ function App() {
     const IEE = Math.round((AEc / SAEc) * 100); // calcolo il valore di IEE
     setIEE(IEE); // aggiorno lo stato di IEE
   };
+  const ResetAll =()=> {
+  setCategory("1.Frigorifero Verticale");
+  setVolume("");
+  setEnergy("");
+  setIEE("");
+  setSAEc("");
+  };
 
   useEffect(() => {
    const timeoutVolume= setTimeout(function () {
@@ -60,7 +67,7 @@ function App() {
   return (
     <div className="App-header">
       <h1>Calcolo del coefficiente IEE per i frigoriferi</h1>
-      <div>
+      <div id="container-category">
         <label htmlFor="category">Categoria:</label>
         <select
           id="category"
@@ -89,7 +96,7 @@ function App() {
           value={volume}
           onChange={(e) => setVolume(e.target.value)}
         />
-        <button onClick={calculateSAEc}>Calcola SAEc</button>
+        <button id="Saec" onClick={calculateSAEc}>Calcola SAEc</button>
       </div>
       <div >
           {SAEc ? (
@@ -110,7 +117,8 @@ function App() {
           />
         </div>
         <div>
-          <button onClick={calculateIEE}>Calcola</button>
+          <button id="calculate-iee" onClick={calculateIEE}>Calcola IEE</button>
+          <button id="reset" onClick={ResetAll}>Reset</button>
         </div>
         <div>
           {IEE? (
