@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [category, setCategory] = useState(
-    "1.Frigorifero Verticale"
-  ); // stato per la categoria dell'apparecchio
+  const [category, setCategory] = useState("1.Frigorifero Verticale"); // stato per la categoria dell'apparecchio
   const [volume, setVolume] = useState(""); // stato per il volume dell'apparecchio
   const [energy, setEnergy] = useState(""); // stato per l'energia annua consumata dall'apparecchio
   const [SAEc, setSAEc] = useState(""); // stato per il valore di SAEc
@@ -13,21 +11,17 @@ function App() {
   const [errorEnergy, setErrorEnergy] = useState(""); // stato per l'errore
   // Tabella dei valori di M ed N in base alla categoria dell'apparecchio
   const table = {
-    "1.Frigorifero Verticale":
-      { M: 1.643, N: 609 },
-    "2.Congelatore Verticale":
-      { M: 4.928, N: 1472 },
-    "3.Tavolo Refrigerato": 
-    { M: 2.555, N: 1790, },
-    "4.Tavolo Congelatore": 
-    { M: 5.840, N: 2380 },
+    "1.Frigorifero Verticale": { M: 1.643, N: 609 },
+    "2.Congelatore Verticale": { M: 4.928, N: 1472 },
+    "3.Tavolo Refrigerato": { M: 2.555, N: 1790 },
+    "4.Tavolo Congelatore": { M: 5.84, N: 2380 },
   };
 
   // Funzione per il calcolo di SAEc
   const calculateSAEc = () => {
     if (volume === "") {
       setErrorVolume("inserisci un numero per il volume del prodotto");
-      setSAEc("")
+      setSAEc("");
     } else {
       const Veq = volume; // converto il volume da stringa a numero
       const { M, N } = table[category]; // ottengo i valori di M ed N dalla tabella
@@ -43,27 +37,33 @@ function App() {
   const calculateIEE = () => {
     if (energy === "") {
       setErrorEnergy("inserisci un numero espresso in KW/Anno");
-      setIEE("")
+      setIEE("");
+    } else if (SAEc === "") {
+      setErrorEnergy(
+        "Devi calcolare prima il SAEC, schiaccia il tasto 'calcola SAEc' se non lo hai cliccato"
+      );
+      setIEE("");
+    } else {
+      const AEc = parseFloat(energy); // converto l'energia annua consumata da stringa a numero
+      const IEE = Math.round((AEc / SAEc) * 100); // calcolo il valore di IEE
+      setIEE(IEE); // aggiorno lo stato di IEE
     }
-    const AEc = parseFloat(energy); // converto l'energia annua consumata da stringa a numero
-    const IEE = Math.round((AEc / SAEc) * 100); // calcolo il valore di IEE
-    setIEE(IEE); // aggiorno lo stato di IEE
   };
-  const ResetAll =()=> {
-  setCategory("1.Frigorifero Verticale");
-  setVolume("");
-  setEnergy("");
-  setIEE("");
-  setSAEc("");
+  const ResetAll = () => {
+    setCategory("1.Frigorifero Verticale");
+    setVolume("");
+    setEnergy("");
+    setIEE("");
+    setSAEc("");
   };
 
   useEffect(() => {
-   const timeoutVolume= setTimeout(function () {
+    const timeoutVolume = setTimeout(function () {
       setErrorVolume("");
       setErrorEnergy("");
-    }, 3000);   
+    }, 3000);
     return () => clearTimeout(timeoutVolume);
-  }, [errorEnergy,errorVolume]);
+  }, [errorEnergy, errorVolume]);
   return (
     <div className="App-header">
       <h1>Calcolo del coefficiente IEE per i frigoriferi</h1>
@@ -75,17 +75,13 @@ function App() {
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="1.Frigorifero Verticale">
-          1.Frigorifero Verticale
+            1.Frigorifero Verticale
           </option>
           <option value="2.Congelatore Verticale">
-          2.Congelatore Verticale
+            2.Congelatore Verticale
           </option>
-          <option value="3.Tavolo Refrigerato">
-          3.Tavolo Refrigerato
-          </option>
-          <option value="4.Tavolo Congelatore">
-          4.Tavolo Congelatore
-          </option>
+          <option value="3.Tavolo Refrigerato">3.Tavolo Refrigerato</option>
+          <option value="4.Tavolo Congelatore">4.Tavolo Congelatore</option>
         </select>
       </div>
       <div>
@@ -96,17 +92,18 @@ function App() {
           value={volume}
           onChange={(e) => setVolume(e.target.value)}
         />
-        <button id="Saec" onClick={calculateSAEc}>Calcola SAEc</button>
+        <button id="Saec" onClick={calculateSAEc}>
+          Calcola SAEc
+        </button>
       </div>
-      <div >
-          {SAEc ? (
-            <p>Il coefficiente SAEc è: {SAEc}</p>
-          ) : (
-            <p style={{ color: "red" }}>{errorVolume}</p>
-          )}
-          </div>
-      <div >
-
+      <div>
+        {SAEc ? (
+          <p>Il coefficiente SAEc è: {SAEc}</p>
+        ) : (
+          <p style={{ color: "red" }}>{errorVolume}</p>
+        )}
+      </div>
+      <div>
         <div>
           <label htmlFor="energy">Energia annua consumata (kWh/Anno):</label>
           <input
@@ -117,11 +114,15 @@ function App() {
           />
         </div>
         <div>
-          <button id="calculate-iee" onClick={calculateIEE}>Calcola IEE</button>
-          <button id="reset" onClick={ResetAll}>Reset</button>
+          <button id="calculate-iee" onClick={calculateIEE}>
+            Calcola IEE
+          </button>
+          <button id="reset" onClick={ResetAll}>
+            Reset
+          </button>
         </div>
         <div>
-          {IEE? (
+          {IEE ? (
             <p>Il coefficiente IEE è: {IEE}</p>
           ) : (
             <p style={{ color: "red" }}>{errorEnergy}</p>
