@@ -69,13 +69,6 @@ function ProgressBar({ value, minValue, maxValue }) {
       <p style={{ fontSize: "24px ", color: "#FF9900" }}>
         Il prodotto è in classe: {getClass()}{" "}
       </p>
-      {percentage <= 30 && (
-        <div class="container">
-          <div class="firework"></div>
-          <div class="firework"></div>
-          <div class="firework"></div>
-        </div>
-      )}
     </div>
   );
 }
