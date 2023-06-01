@@ -18,7 +18,6 @@ function ReferenceNumbers() {
 
 function ProgressBar({ value, minValue, maxValue }) {
   const percentage = ((value - minValue) / (maxValue - minValue)) * 100;
-  console.log(percentage);
   const getColor = () => {
     switch (true) {
       case percentage <= 30:
