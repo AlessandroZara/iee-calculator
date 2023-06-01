@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ProgressBar from "./ProgressBar";
 import "./App.css";
 
 function App() {
@@ -64,6 +65,10 @@ function App() {
     }, 3000);
     return () => clearTimeout(timeoutVolume);
   }, [errorEnergy, errorVolume]);
+
+  const minValue = 0;
+  const maxValue = 100;
+
   return (
     <div className="App-header">
       <h1>Calcolo del coefficiente IEE per i frigoriferi</h1>
@@ -123,7 +128,8 @@ function App() {
         </div>
         <div>
           {IEE ? (
-            <p>Il coefficiente IEE è: {IEE}</p>
+            <><p>Il coefficiente IEE è: {IEE}</p>
+            <ProgressBar value={IEE} minValue={minValue} maxValue={maxValue} /></>
           ) : (
             <p style={{ color: "red" }}>{errorEnergy}</p>
           )}
