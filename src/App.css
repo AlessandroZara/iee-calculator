@@ -88,7 +88,39 @@ select:disabled {
   z-index: 1;
 }
 
+@keyframes firework {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
 
+.firework {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  animation: firework 1s ease-in-out infinite;
+}
+
+.container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
