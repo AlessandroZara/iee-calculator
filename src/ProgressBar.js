@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css"
-function ReferenceNumbers({ minValue, maxValue }) {
+function ReferenceNumbers() {
   return (
     <div className="reference-numbers">
       <div className="reference-numbers">
