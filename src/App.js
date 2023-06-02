@@ -26,11 +26,11 @@ function App() {
     } else {
       const Veq = volume; // converto il volume da stringa a numero
       const { M, N } = table[category]; // ottengo i valori di M ed N dalla tabella
+      console.log(table[category])
       const CH = Veq > 15 ? 50 : 15; // calcolo il valore di CH in base al volume dell'apparecchio
       console.log(CH);
       const SAEc = Math.round(Veq * M + N); // calcolo il valore di SAEc
       setSAEc(SAEc); // aggiorno lo stato di SAEc
-      console.log(Veq);
     }
   };
 

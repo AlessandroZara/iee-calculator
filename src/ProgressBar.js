@@ -25,14 +25,14 @@ function ProgressBar({ value, minValue, maxValue }) {
       case percentage > 61:
         return "red"; // Colore rosso per valori superiori o uguali a 70
       case percentage > 30 && percentage <= 40:
-        return "orange";
+        return "orange"; // Colore Arancione per valori compresi tra 30 e 40
       case percentage > 41 && percentage <= 50:
-        return "blue";
+        return "blue"; // Colore Blue per valori compresi tra 30 e 40
       case percentage > 51 && percentage <= 60:
-        return "violet";
+        return "violet"; // Colore Viola per valori compresi tra 30 e 40
       default:
-        // Aggiungi altri casi per gestire gli intervalli desiderati
-        return "grey"; // Colore predefinito per gli intervalli non gestiti
+        
+        return "grey"; // Colore predefinito 
     }
   };
 
@@ -55,8 +55,8 @@ function ProgressBar({ value, minValue, maxValue }) {
       case percentage > 51 && percentage <= 60:
         return classEnergy[3];
       default:
-        // Aggiungi altri casi per gestire gli intervalli desiderati
-        return "grey"; // Colore predefinito per gli intervalli non gestiti
+       
+        return "grey"; // Colore predefinito 
     }
   }
   return (
