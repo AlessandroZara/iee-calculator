@@ -1,9 +1,9 @@
 {
   "name": "iee-calcolatore",
   "version": "1.0.0",
-  "description": "App per calcolare L'indice IEE",
+  "description": "IEE Calculator",
   "main": "public/main.js",
-  "productName": "App per calcolare L'indice IEE",
+  "productName": "IEE Calculator",
   "homepage": "./",
   "author": "Alessandro Zara",
   "license": "MIT",
@@ -18,24 +18,24 @@
     "web-vitals": "^2.1.4"
   },
   "build": {
-    "productName": "IEE Calcoulator",
+    "productName": "IEE Calculator",
     "appId": "my_app_id:iee_calculator",
     "directories": {
-        "buildResources": "build"
+      "buildResources": "build"
     },
     "files": [
       "build/**/*"
     ],
     "win": {
-        "target": "nsis",
-        "icon": "build/icon.ico"
+      "target": "nsis",
+      "icon": "build/icon.ico"
     },
     "nsis": {
       "installerIcon": "build/icon.ico",
       "installerHeaderIcon": "build/icon.ico",
       "deleteAppDataOnUninstall": true
     }
-},
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
