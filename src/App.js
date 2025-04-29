@@ -3,53 +3,47 @@ import ProgressBar from "./ProgressBar";
 import "./App.css";
 
 function App() {
-  const [category, setCategory] = useState("1.Frigorifero Verticale"); // stato per la categoria dell'apparecchio
-  const [volume, setVolume] = useState(""); // stato per il volume dell'apparecchio
-  const [energy, setEnergy] = useState(""); // stato per l'energia annua consumata dall'apparecchio
-  const [SAEc, setSAEc] = useState(""); // stato per il valore di SAEc
-  const [IEE, setIEE] = useState(""); // stato per il valore del coefficiente IEE
-  const [errorVolume, setErrorVolume] = useState(""); // stato per l'errore
-  const [errorEnergy, setErrorEnergy] = useState(""); // stato per l'errore
-  // Tabella dei valori di M ed N in base alla categoria dell'apparecchio
+  const [category, setCategory] = useState("1.Frigorifero Verticale");
+  const [volume, setVolume] = useState("");
+  const [energy, setEnergy] = useState(""); // Stato per l'energia annua consumata (kWh/anno)
+  const [SAEc, setSAEc] = useState("");
+  const [IEE, setIEE] = useState("");
+  const [errorVolume, setErrorVolume] = useState("");
+  const [errorEnergy, setErrorEnergy] = useState("");
   const table = {
     "1.Frigorifero Verticale": { M: 1.643, N: 609 },
     "2.Congelatore Verticale": { M: 4.928, N: 2.555 },
-    "3.Tavolo Refrigerato": { M: 2.555, N: 1790 },
+    "3.Tavolo Refrigerato": { M: 2.555, N: 1.790 },
     "4.Tavolo Congelatore": { M: 5.840, N: 2.380 },
   };
-
-  // Funzione per il calcolo di SAEc
   const calculateSAEc = () => {
     if (volume === "") {
-      setErrorVolume("inserisci un numero per il volume del prodotto");
+      setErrorVolume("Inserisci un numero per il volume del prodotto");
       setSAEc("");
     } else {
-      const Veq = volume; // converto il volume da stringa a numero
-      const { M, N } = table[category]; // ottengo i valori di M ed N dalla tabella
-      console.log(table[category])
-      const CH = Veq > 15 ? 50 : 15; // calcolo il valore di CH in base al volume dell'apparecchio
-      console.log(CH);
-      const SAEc = Math.round(Veq * M + N); // calcolo il valore di SAEc
-      setSAEc(SAEc); // aggiorno lo stato di SAEc
+      const Veq = parseFloat(volume);
+      const { M, N } = table[category];
+      const SAEcValue = Math.round(Veq * M + N);
+      setSAEc(SAEcValue);
     }
   };
 
-  // Funzione per il calcolo di IEE
   const calculateIEE = () => {
     if (energy === "") {
-      setErrorEnergy("inserisci un numero espresso in KW/Anno");
+      setErrorEnergy("Inserisci un numero per l'energia consumata in kWh/Anno");
       setIEE("");
     } else if (SAEc === "") {
       setErrorEnergy(
-        "Devi calcolare prima il SAEC, schiaccia il tasto 'calcola SAEc' se non lo hai cliccato"
+        "Devi calcolare prima il SAEC, schiaccia il tasto 'calcola SAEc'"
       );
       setIEE("");
     } else {
-      const AEc = parseFloat(energy); // converto l'energia annua consumata da stringa a numero
-      const IEE = Math.round((AEc / SAEc) * 100); // calcolo il valore di IEE
-      setIEE(IEE); // aggiorno lo stato di IEE
+      const AEc = parseFloat(energy); // L'energia inserita è già annua
+      const IEEValue = Math.round((AEc / SAEc) * 100);
+      setIEE(IEEValue);
     }
   };
+
   const ResetAll = () => {
     setCategory("1.Frigorifero Verticale");
     setVolume("");
@@ -71,7 +65,7 @@ function App() {
 
   return (
     <div className="App-header">
-      <h1>Calcolo del coefficiente IEE per i frigoriferi</h1>
+      <h1>Calcolo del coefficiente IEE per frigoriferi professionali</h1>
       <div id="container-category">
         <label htmlFor="category">Categoria:</label>
         <select
@@ -90,7 +84,7 @@ function App() {
         </select>
       </div>
       <div>
-        <label htmlFor="volume">Volume (litri):</label>
+        <label htmlFor="volume">Volume netto (litri):</label>
         <input
           type="text"
           id="volume"
@@ -128,8 +122,10 @@ function App() {
         </div>
         <div>
           {IEE ? (
-            <><p>Il coefficiente IEE è: {IEE}</p>
-            <ProgressBar value={IEE} minValue={minValue} maxValue={maxValue} /></>
+            <>
+              <p>Il coefficiente IEE è: {IEE}</p>
+              <ProgressBar value={IEE} minValue={minValue} maxValue={maxValue} />
+            </>
           ) : (
             <p style={{ color: "red" }}>{errorEnergy}</p>
           )}
