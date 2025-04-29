@@ -13,9 +13,9 @@ function App() {
   // Tabella dei valori di M ed N in base alla categoria dell'apparecchio
   const table = {
     "1.Frigorifero Verticale": { M: 1.643, N: 609 },
-    "2.Congelatore Verticale": { M: 4.928, N: 1472 },
+    "2.Congelatore Verticale": { M: 4.928, N: 2.555 },
     "3.Tavolo Refrigerato": { M: 2.555, N: 1790 },
-    "4.Tavolo Congelatore": { M: 5.84, N: 2380 },
+    "4.Tavolo Congelatore": { M: 5.840, N: 2.380 },
   };
 
   // Funzione per il calcolo di SAEc
